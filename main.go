@@ -66,6 +66,7 @@ var CLI struct {
 		MetricsAddr   string `default:":8080" help:"The address the metric endpoint binds to."`
 		ConfigMapMode bool   `default:"false" help:"If the generated recording rules should instead be saved to config maps in the default Prometheus format."`
 		GenericRules  bool   `default:"false" help:"Enabled generic recording rules generation to make it easier for tools like Grafana."`
+		PrometheusURL *url.URL
 	} `cmd:"" help:"Runs Pyrra's Kubernetes operator and backend for the API."`
 }
 
@@ -90,7 +91,8 @@ func main() {
 	case "filesystem":
 		prometheusURL = CLI.Filesystem.PrometheusURL
 	default:
-		prometheusURL, _ = url.Parse("http://localhost:9090")
+		// prometheusURL, _ = url.Parse("http://localhost:9090")
+		prometheusURL = CLI.Kubernetes.PrometheusURL
 	}
 
 	roundTripper, err := promconfig.NewRoundTripperFromConfig(promconfig.HTTPClientConfig{
