@@ -271,6 +271,7 @@ func (in ServiceLevelObjective) Internal() (slo.Objective, error) {
 		Description: in.Spec.Description,
 		Target:      target / 100,
 		Window:      window,
+		Annotations: in.Annotations,
 		Config:      string(config),
 		Alerting:    alerting,
 		Indicator: slo.Indicator{

@@ -108,7 +108,7 @@ func main() {
 		level.Error(logger).Log("msg", "failed to create API client round tripper", "err", err)
 		os.Exit(1)
 	} else {
-		level.Info(logger).Log("API client round tripper created")
+		level.Info(logger).Log("msg", "API client round tripper created", "roundTripper", roundTripper)
 	}
 
 	client, err := api.NewClient(api.Config{
@@ -118,6 +118,8 @@ func main() {
 	if err != nil {
 		level.Error(logger).Log("msg", "failed to create API client", "err", err)
 		os.Exit(1)
+	} else {
+		level.Info(logger).Log("msg", "made API client", "client", client)
 	}
 	// Wrap client to add extra headers for Thanos.
 	client = newThanosClient(client)

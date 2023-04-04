@@ -342,6 +342,20 @@ func (o Objective) commonRuleLabels(sloName string) map[string]string {
 	return ruleLabels
 }
 
+func (o Objective) commonRuleAnnotations() map[string]string {
+	var annotations map[string]string
+	if len(o.Annotations) > 0 {
+		annotations = make(map[string]string)
+		for key, value := range o.Annotations {
+			if strings.HasPrefix(key, PropagationLabelsPrefix) {
+				annotations[strings.TrimPrefix(key, PropagationLabelsPrefix)] = value
+			}
+		}
+	}
+
+	return annotations
+}
+
 func (o Objective) IncreaseRules() (monitoringv1.RuleGroup, error) {
 	sloName := o.Labels.Get(labels.MetricName)
 

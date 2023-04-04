@@ -21,6 +21,7 @@ type Objective struct {
 	Target      float64
 	Window      model.Duration
 	Config      string
+	Annotations map[string]string
 
 	Alerting  Alerting
 	Indicator Indicator

@@ -24,6 +24,8 @@ kind: ServiceLevelObjective
 metadata:
   name: http-errors
   namespace: monitoring
+  annotations:
+    pyrra.dev/description: "foo"
   labels:
     prometheus: k8s
     role: alert-rules
@@ -44,6 +46,7 @@ spec:
 				"namespace", "monitoring",
 				"pyrra.dev/team", "foo",
 			),
+			Annotations: map[string]string{"pyrra.dev/description": "foo"},
 			Description: "",
 			Target:      0.99,
 			Window:      model.Duration(7 * 24 * time.Hour),
